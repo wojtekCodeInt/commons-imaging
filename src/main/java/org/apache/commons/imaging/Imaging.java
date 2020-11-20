@@ -705,7 +705,7 @@ public abstract class Imaging implements ImagingConstants {
         return imageInfo;
     }
 
-    private static ImageParser getImageParser(final ByteSource byteSource)
+    public static ImageParser getImageParser(final ByteSource byteSource)
             throws ImageReadException, IOException {
         final ImageFormat format = guessFormat(byteSource);
         if (!format.equals(ImageFormats.UNKNOWN)) {
