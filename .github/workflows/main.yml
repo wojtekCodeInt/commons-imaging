@@ -36,7 +36,7 @@ jobs:
           owner: ${{ github.event.repository.owner.login }}
           repository: ${{ github.event.repository.name }}
           fuzzing_server_address: ${{ env.FUZZING_SERVER_ADDRESS }}
-          dashboard:address: ${{ env.DASHBOARD_ADDRESS }}
+          dashboard_ddress: ${{ env.DASHBOARD_ADDRESS }}
       - id: report-coverage
         name: Report Coverage
         uses: CodeIntelligenceTesting/github-actions/report-coverage@master
@@ -51,5 +51,5 @@ jobs:
           repository: ${{ github.event.repository.name }}
           git_reference: ${{ github.sha }}
           fuzzing_server_address: ${{ env.FUZZING_SERVER_ADDRESS }}
-          dashboard:address: ${{ env.DASHBOARD_ADDRESS }}
+          dashboard_address: ${{ env.DASHBOARD_ADDRESS }}
           
