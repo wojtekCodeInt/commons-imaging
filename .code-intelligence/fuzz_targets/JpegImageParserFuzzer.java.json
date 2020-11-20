@@ -1,0 +1,15 @@
+{
+  "name": "JpegImageParserFuzzer.java-584da7bd",
+  "displayName": "JpegImageParserFuzzer.java",
+  "javaApi": {
+    "jars": [
+      "target/commons-imaging-1.0.jar"
+    ],
+    "instrumentationFilters": [
+      "org.apache.commons.imaging.formats.jpeg"
+    ],
+    "api": {
+      "relativePath": ".code-intelligence/fuzz_targets/JpegImageParserFuzzer.java"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "default_campaign-acb3e69c",
+  "displayName": "JpegImageParser",
+  "maxRunTime": "1800s",
+  "fuzzTargets": [
+    "JpegImageParserFuzzer.java-584da7bd"
+  ],
+  "fuzzerRunConfigurations": [
+    {
+      "engine": "JAVA_LIBFUZZER",
+      "numberOfJobs": 1
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "projects/commons-imaging-094498a4",
+  "displayName": "commons-imaging",
+  "buildScriptContent": "#!/bin/bash -eu\n# Here you can provide a script to build your project. Here you should provide\n# the steps as you would normally build your code. The CI security suite will\n# then automatically perform all needed adjustments necessary to build the fuzzers\n# based on the provided configurations.\n\nmvn install -DskipTests\n",
+  "details": {
+    "javaDetails": {
+      "jars": [
+        "target/commons-imaging-1.0.jar"
+      ],
+      "packages": [
+        "org",
+        "org.apache",
+        "org.apache.commons",
+        "org.apache.commons.imaging",
+        "org.apache.commons.imaging.color",
+        "org.apache.commons.imaging.common",
+        "org.apache.commons.imaging.common.bytesource",
+        "org.apache.commons.imaging.common.itu_t4",
+        "org.apache.commons.imaging.common.mylzw",
+        "org.apache.commons.imaging.examples",
+        "org.apache.commons.imaging.formats",
+        "org.apache.commons.imaging.formats.bmp",
+        "org.apache.commons.imaging.formats.bmp.pixelparsers",
+        "org.apache.commons.imaging.formats.bmp.writers",
+        "org.apache.commons.imaging.formats.dcx",
+        "org.apache.commons.imaging.formats.gif",
+        "org.apache.commons.imaging.formats.icns",
+        "org.apache.commons.imaging.formats.ico",
+        "org.apache.commons.imaging.formats.jpeg",
+        "org.apache.commons.imaging.formats.jpeg.decoder",
+        "org.apache.commons.imaging.formats.jpeg.exif",
+        "org.apache.commons.imaging.formats.jpeg.iptc",
+        "org.apache.commons.imaging.formats.jpeg.segments",
+        "org.apache.commons.imaging.formats.jpeg.xmp",
+        "org.apache.commons.imaging.formats.pam",
+        "org.apache.commons.imaging.formats.pcx",
+        "org.apache.commons.imaging.formats.png",
+        "org.apache.commons.imaging.formats.png.chunks",
+        "org.apache.commons.imaging.formats.png.scanlinefilters",
+        "org.apache.commons.imaging.formats.png.transparencyfilters",
+        "org.apache.commons.imaging.formats.pnm",
+        "org.apache.commons.imaging.formats.psd",
+        "org.apache.commons.imaging.formats.psd.dataparsers",
+        "org.apache.commons.imaging.formats.psd.datareaders",
+        "org.apache.commons.imaging.formats.rgbe",
+        "org.apache.commons.imaging.formats.tga",
+        "org.apache.commons.imaging.formats.tiff",
+        "org.apache.commons.imaging.formats.tiff.constants",
+        "org.apache.commons.imaging.formats.tiff.datareaders",
+        "org.apache.commons.imaging.formats.tiff.fieldtypes",
+        "org.apache.commons.imaging.formats.tiff.photometricinterpreters",
+        "org.apache.commons.imaging.formats.tiff.taginfos",
+        "org.apache.commons.imaging.formats.tiff.write",
+        "org.apache.commons.imaging.formats.wbmp",
+        "org.apache.commons.imaging.formats.xbm",
+        "org.apache.commons.imaging.formats.xmp",
+        "org.apache.commons.imaging.formats.xpm",
+        "org.apache.commons.imaging.icc",
+        "org.apache.commons.imaging.palette",
+        "org.apache.commons.imaging.roundtrip",
+        "org.apache.commons.imaging.test",
+        "org.apache.commons.imaging.test.util",
+        "org.apache.commons.imaging.util"
+      ]
+    },
+    "javaWebAppDetails": {
+      "projectExceptionPolicy": {
+        "policy": [
+          {
+            "enabled": true,
+            "responsePolicy": {
+              "responseMatcher": "CODE_STARTS_WITH",
+              "code": 2
+            }
+          },
+          {
+            "enabled": true,
+            "responsePolicy": {
+              "responseMatcher": "CODE_STARTS_WITH",
+              "code": 4
+            }
+          },
+          {
+            "enabled": true,
+            "responsePolicy": {
+              "code": 302
+            }
+          },
+          {
+            "enabled": true,
+            "exceptionPolicy": {
+              "Exception": "java.lang.IllegalArgumentException",
+              "exceptionStrategy": "STACKTRACE_CONTAINS",
+              "content": "org.springframework.web.util.UriComponentsBuilder"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "projectEnvironment": {
+    "dockerBuild": {
+      "name": "registry.gitlab.com/code-intelligence/core/builders/commons-imaging"
+    },
+    "dockerRun": {
+      "name": "registry.gitlab.com/code-intelligence/core/builders/commons-imaging"
+    }
+  }
+}
