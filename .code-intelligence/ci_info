@@ -100,10 +100,10 @@
   },
   "projectEnvironment": {
     "dockerBuild": {
-      "name": "registry.gitlab.com/code-intelligence/core/builders/commons-imaging"
+      "name": "cifuzz/builders:maven"
     },
     "dockerRun": {
-      "name": "registry.gitlab.com/code-intelligence/core/builders/commons-imaging"
+      "name": "cifuzz/builders:maven"
     }
   }
 }
