@@ -11,14 +11,12 @@ import org.apache.commons.imaging.formats.jpeg.JpegImageParser;
 import org.apache.commons.imaging.common.bytesource.ByteSourceArray;
 
 public class JpegImageParserFuzzer {
-	public static boolean fuzzerTestOneInput(byte[] input) {	
+	public static void fuzzerTestOneInput(byte[] input) {	
 		try {
 			JpegImageParser p = new JpegImageParser();
 			BufferedImage image = p.getBufferedImage(new ByteSourceArray(input), new HashMap<>());
 		} catch (IOException | ImageReadException e) {
-			return false;
+			return;
 		}
-
-		return false;
 	}
 }
