@@ -27,18 +27,18 @@ import org.apache.commons.imaging.formats.xbm.XbmImageParser;
 import org.apache.commons.imaging.formats.xpm.XpmImageParser;
 
 import org.apache.commons.imaging.ImageParser;
+import java.awt.image.RasterFormatException;
+
 
 
 public class AllFormatsFuzzer {
 	public static void fuzzerTestOneInput(byte[] input) {	
 		try {
-			//JpegImageParser p = new JpegImageParser();
 			ImageParser[] p = ImageParser.getAllImageParsers();
 			for (int i = 0; i < p.length; i++) {
 				BufferedImage image = p[i].getBufferedImage(new ByteSourceArray(input), new HashMap<>());
 			 }
-			BufferedImage image = p[1].getBufferedImage(new ByteSourceArray(input), new HashMap<>());
-		} catch (IOException | ImageReadException e) {
+		} catch (IOException | ImageReadException | RasterFormatException e) {
 			return;
 		}
 	}
