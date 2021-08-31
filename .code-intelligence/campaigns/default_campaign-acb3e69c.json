@@ -3,7 +3,7 @@
   "displayName": "JpegImageParser",
   "maxRunTime": "1800s",
   "fuzzTargets": [
-    "JpegImageParserFuzzer.java-584da7bd"
+    "LmNvZGUtaW50ZWxsaWdlbmNlL2Z1enpfdGFyZ2V0cy9KcGVnSW1hZ2VQYXJzZXJGdXp6ZXIuamF2YQ=="
   ],
   "fuzzerRunConfigurations": [
     {
