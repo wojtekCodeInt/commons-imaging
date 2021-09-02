@@ -38,7 +38,7 @@ build_script: ".code-intelligence/build.sh"
 ## Paths to the fuzz targets to execute
 fuzz_tests:
   - .code-intelligence/fuzz_targets/JpegImageParserFuzzer.java
-    #  - .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
+  - .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
 
 ## Paths to web app fuzz target configs
 #web_app_target_configs:
