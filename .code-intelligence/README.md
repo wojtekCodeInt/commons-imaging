@@ -1,6 +1,6 @@
 # Fuzzing the Apache Commons Imaging Java Image Library
 
-## What is Zint?
+## What is Commons Imaging?
 
 Apache Commons Imaging, previously known as Apache Commons Sanselan, is a library 
 that reads and writes a variety of image formats, including fast parsing of 
