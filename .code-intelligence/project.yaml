@@ -5,6 +5,9 @@
 ## setting, lines that start with "#" are settings that can be enabled
 ## by removing the "#".
 
+description: >
+  Apache Commons Imaging, previously known as Apache Commons Sanselan, is a library that reads and writes a variety of image formats, including fast parsing of image info (size, color space, ICC profile, etc.) and metadata.
+
 ## The fuzz targets are built and run in Docker containers. This setting
 ## allows you to specify the Docker image that should be used for
 ## building this project. It must contain all the dependencies required
