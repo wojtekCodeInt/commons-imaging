@@ -1,12 +1,9 @@
 ## Configuration for a CI Fuzz project
-## Generated on 2021-08-31 with CI Fuzz 2.23.0
+## Generated on 2021-10-08 with CI Fuzz 2.25.0
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled
 ## by removing the "#".
-
-description: >
-  Apache Commons Imaging, previously known as Apache Commons Sanselan, is a library that reads and writes a variety of image formats, including fast parsing of image info (size, color space, ICC profile, etc.) and metadata.
 
 ## The fuzz targets are built and run in Docker containers. This setting
 ## allows you to specify the Docker image that should be used for
@@ -38,12 +35,13 @@ run_container: "cifuzz/builders:maven"
 ## The path must be relative to the root of the project directory.
 build_script: ".code-intelligence/build.sh"
 
-## Paths to the fuzz targets to execute
+## Paths to the fuzz targets to execute.
 fuzz_tests:
-  - .code-intelligence/fuzz_targets/JpegImageParserFuzzer.java
   - .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
+  - .code-intelligence/fuzz_targets/JpegImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/DetectFormat.java
 
-## Paths to web app fuzz target configs
+## Paths to web app fuzz target configs.
 #web_app_target_configs:
 #  - .code-intelligence/fuzz_targets/*.yaml
 
@@ -57,13 +55,13 @@ sanitizers:
 ## The fuzzing engines to use for the fuzz tests. By default, only
 ## libfuzzer is used. Only valid for C/C++ targets.
 #engines:
-# - libfuzzer
-# - afl
-# - afl_llvm_mode
+#  - libfuzzer
+#  - afl
+#  - afl_llvm_mode
 
 ## The run time after which the fuzz tests are cancelled and
 ## considered as having passed. The default is 30 minutes.
-runtime: "30m0s"
+max_runtime: "30m0s"
 
 ## The number of parallel executions per fuzz test. The default is 1,
 ## which means for each combination of fuzzing engine and sanitizer,
