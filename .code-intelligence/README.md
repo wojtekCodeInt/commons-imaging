@@ -12,9 +12,13 @@ Fuzzing is a dynamic code analysis technique that supplies pseudo-random inputs
 to a software-under-test (SUT), derives new inputs from the behaviour of the
 program (i.e. how inputs are processed), and monitors the SUT for bugs.
 
-Even though Commons Imaging is written in Java, which has the advantage
-to be memory safe compared to C/C++, other potentially harmful bugs like uncaught
-exceptions or denial of service problems can be detected using fuzzing.
+## How can fuzzing improve this application
+
+By sending unexpected inputs to the parsers, fuzzing can trigger erroneous behaviour.
+In case of Java applications, CI Fuzz detects and reports all unhandled exceptions,
+which by itself can often point developers at bugs and vulnerabilities. 
+There are also detectors for specific vulnerabilities, for example insecure deserialization, SQL and LDAP injections
+and others.
 
 ## Fuzzing where raw data is handled
 
@@ -56,4 +60,36 @@ expression.
 
 The rule of thumb for a good fuzz test is that the format of the inputs should
 be roughly the same. Therefore, it is sensible to split up the big fuzz test for
-all barcode types into individual fuzz tests.
+all image types into individual fuzz tests.
+
+## Fuzzing in CI/CD
+
+If integrated in the CI/CD fuzzing can help to find regressions or bugs in new code before early in the process.
+This reduces costs and effort fixing them and supports you delivering reliable and secure software.
+Once setup, the CI/CD integration can be used to fuzz every new commit made to selected branches
+or to fuzz pull requests before they are merged. The corpus data from previous fuzzing runs is used, 
+enabling the fuzzer to use its prior knowledge of the application.
+
+ 
+
+The fuzzing is done on a dedicated fuzzing server. We recommend using the Code Intelligence SaaS solution.
+For enterprises also on-premise server installation in possible.
+
+The results can be viewed in the CI-Fuzz web app, enabling developers that are not familiar with fuzzing
+to view and fix the bugs found by the fuzzer.
+
+CI Fuzz allows you to configure your pipeline to automatically trigger the run of fuzz tests.
+Most of the fuzzing runs that you can inspect here were triggered automatically (e.g. by this
+pull request on the GitHub project: [`https://github.com/ci-fuzz/zint/pull/47`](https://github.com/ci-fuzz/zint/pull/47)).
+With this configuration comes the hidden strength of fuzzing into play:
+Fuzzing is not like a penetration test where your application will be tested one time only.
+Once you have configured your fuzz test it can help you for the whole rest of your developing cycle.
+By running your fuzz test each time when some changes where made to the source code you can quickly check for
+regressions and also quickly identify new introduced bugs that would otherwise turn up possibly months 
+later during a penetration test or (even worse) in production. This can help to significantly reduce the bug ramp down phase of any project.
+
+While these demo projects are configured to trigger fuzzing runs on merge or pull requests
+there are many other configuration options for integrating fuzz testing into your CI/CD pipeline
+for example you could also configure your CI/CD to run nightly fuzz tests.
+
+## Where you can go from here  
