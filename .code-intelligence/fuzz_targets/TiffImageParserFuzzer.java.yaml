@@ -40,7 +40,7 @@ run_extra_args:
 
 ## Package filters to apply when instrumenting the source code.
 instrumentation_filters:
-  - "org.apache.commons.imaging"
+  - "org.apache.commons.imaging.formats.tiff"
 
 ## List of jar dependencies needed by the fuzz target
 jars:

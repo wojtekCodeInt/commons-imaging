@@ -1,5 +1,5 @@
 ## Configuration of a CI Fuzz test
-## Generated on 2021-08-31 with CI Fuzz 2.23.0
+## Generated on 2021-10-12 with CI Fuzz 2.25.0
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled
@@ -26,9 +26,9 @@ run_extra_args:
 ## Options to pass to the fuzzing engine.
 #engine_options:
 #  libfuzzer:
-#    -rss_limit_mb=4096
+#    - -rss_limit_mb=4096
 
-## Environment variables to set when executing the target
+## Environment variables to set when executing the target.
 #environment:
 #  - ASAN_OPTIONS=detect_leaks=0
 
@@ -40,8 +40,8 @@ run_extra_args:
 
 ## Package filters to apply when instrumenting the source code.
 instrumentation_filters:
-  - "org.apache.commons.imaging"
+  - "org.apache.commons.imaging.formats.psd"
 
-## List of jar dependencies needed by the fuzz target
+## List of jar dependencies needed by the fuzz target.
 jars:
   - "target/commons-imaging-1.0.jar"
