@@ -1,9 +1,14 @@
 ## Configuration for a CI Fuzz project
-## Generated on 2021-10-08 with CI Fuzz 2.25.0
+## Generated on 2021-10-12 with CI Fuzz 2.25.0
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled
 ## by removing the "#".
+
+description: >
+ Apache Commons Imaging, previously known as Apache Commons Sanselan, is a library 
+ that reads and writes a variety of image formats, including fast parsing of 
+ image info (size, color space, ICC profile, etc.) and metadata.
 
 ## The fuzz targets are built and run in Docker containers. This setting
 ## allows you to specify the Docker image that should be used for
@@ -37,9 +42,23 @@ build_script: ".code-intelligence/build.sh"
 
 ## Paths to the fuzz targets to execute.
 fuzz_tests:
-  - .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
+  #- .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
+  #- .code-intelligence/fuzz_targets/DetectFormat.java
   - .code-intelligence/fuzz_targets/JpegImageParserFuzzer.java
-  - .code-intelligence/fuzz_targets/DetectFormat.java
+  - .code-intelligence/fuzz_targets/PngImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/GifImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/BmpImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/PsdImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/RgbeImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/DcxImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/IcnsImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/IcoImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/PcxImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/PnmImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/TiffImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/WbmpImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/XbmImageParserFuzzer.java
+  - .code-intelligence/fuzz_targets/XpmImageParserFuzzer.java
 
 ## Paths to web app fuzz target configs.
 #web_app_target_configs:
@@ -51,17 +70,17 @@ fuzz_tests:
 ## Address Sanitizer (and Undefined Behavior Sanitizer) is used.
 sanitizers:
   - address
+  - address
 
 ## The fuzzing engines to use for the fuzz tests. By default, only
 ## libfuzzer is used. Only valid for C/C++ targets.
-#engines:
-#  - libfuzzer
-#  - afl
-#  - afl_llvm_mode
+engines:
+  - libfuzzer
+  - libfuzzer
 
 ## The run time after which the fuzz tests are cancelled and
 ## considered as having passed. The default is 30 minutes.
-max_runtime: "30m0s"
+max_runtime: "10m0s"
 
 ## The number of parallel executions per fuzz test. The default is 1,
 ## which means for each combination of fuzzing engine and sanitizer,
