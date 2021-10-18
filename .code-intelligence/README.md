@@ -39,8 +39,7 @@ public class JpegImageParserFuzzer {
 // 2. Create an JpegImageParser and try to convert the input data into an image by calling the getBufferedImage function
 			JpegImageParser p = new JpegImageParser();
 			BufferedImage image = p.getBufferedImage(new ByteSourceArray(input), new HashMap<>());
-// 3. Catch exceptions that are thrown when the image parser gets malformed input data. This behaviour 
-is expected and we don't want to consider this a bug
+// 3. Catch exceptions that are thrown when the image parser gets malformed input data. This behaviour is expected and we don't want to consider this a bug
 		} catch (IOException | ImageReadException e) {
 			return;
 		}
