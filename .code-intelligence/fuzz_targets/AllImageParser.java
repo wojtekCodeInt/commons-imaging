@@ -43,7 +43,7 @@ public class AllImageParser {
 		}
 
 		final ImageFormat format = ImageFormats.values()[data.consumeInt(0,14)];
-        final Map<String, Object> params = new HashMap<>();
+		final Map<String, Object> params = new HashMap<>();
 
 		try{
         	Imaging.writeImageToBytes(image, format, params);
