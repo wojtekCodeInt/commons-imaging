@@ -1,14 +1,12 @@
 ## Configuration for a CI Fuzz project
-## Generated on 2021-10-12 with CI Fuzz 2.25.0
+## Generated on 2021-10-18 with CI Fuzz 2.25.0
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled
 ## by removing the "#".
 
-description: >
- Apache Commons Imaging, previously known as Apache Commons Sanselan, is a library 
- that reads and writes a variety of image formats, including fast parsing of 
- image info (size, color space, ICC profile, etc.) and metadata.
+## Project description to show in the UI.
+description: "Apache Commons Imaging, previously known as Apache Commons Sanselan, is a library  that reads and writes a variety of image formats, including fast parsing of  image info (size, color space, ICC profile, etc.) and metadata. "
 
 ## The fuzz targets are built and run in Docker containers. This setting
 ## allows you to specify the Docker image that should be used for
@@ -42,8 +40,10 @@ build_script: ".code-intelligence/build.sh"
 
 ## Paths to the fuzz targets to execute.
 fuzz_tests:
-  #- .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
-  #- .code-intelligence/fuzz_targets/DetectFormat.java
+  - .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
+  - .code-intelligence/fuzz_targets/DetectFormat.java
+  - .code-intelligence/fuzz_targets/ImageWriteFuzzer.java
+  - .code-intelligence/fuzz_targets/MetadataFuzzer.java
   - .code-intelligence/fuzz_targets/JpegImageParserFuzzer.java
   - .code-intelligence/fuzz_targets/PngImageParserFuzzer.java
   - .code-intelligence/fuzz_targets/GifImageParserFuzzer.java
@@ -59,6 +59,7 @@ fuzz_tests:
   - .code-intelligence/fuzz_targets/WbmpImageParserFuzzer.java
   - .code-intelligence/fuzz_targets/XbmImageParserFuzzer.java
   - .code-intelligence/fuzz_targets/XpmImageParserFuzzer.java
+
 
 ## Paths to web app fuzz target configs.
 #web_app_target_configs:
