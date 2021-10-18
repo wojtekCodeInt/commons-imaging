@@ -44,22 +44,7 @@ fuzz_tests:
   - .code-intelligence/fuzz_targets/DetectFormat.java
   - .code-intelligence/fuzz_targets/ImageWriteFuzzer.java
   - .code-intelligence/fuzz_targets/MetadataFuzzer.java
-#  - .code-intelligence/fuzz_targets/JpegImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/PngImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/GifImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/BmpImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/PsdImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/RgbeImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/DcxImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/IcnsImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/IcoImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/PcxImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/PnmImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/TiffImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/WbmpImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/XbmImageParserFuzzer.java
-#  - .code-intelligence/fuzz_targets/XpmImageParserFuzzer.java
-
+  - .code-intelligence/fuzz_targets/AllImageParser.java
 
 ## Paths to web app fuzz target configs.
 #web_app_target_configs:
