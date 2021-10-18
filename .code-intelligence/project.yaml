@@ -40,10 +40,6 @@ build_script: ".code-intelligence/build.sh"
 
 ## Paths to the fuzz targets to execute.
 fuzz_tests:
-  - .code-intelligence/fuzz_targets/AllFormatsFuzzer.java
-  - .code-intelligence/fuzz_targets/DetectFormat.java
-  - .code-intelligence/fuzz_targets/ImageWriteFuzzer.java
-  - .code-intelligence/fuzz_targets/MetadataFuzzer.java
   - .code-intelligence/fuzz_targets/AllImageParser.java
 
 ## Paths to web app fuzz target configs.
@@ -66,7 +62,7 @@ engines:
 
 ## The run time after which the fuzz tests are cancelled and
 ## considered as having passed. The default is 30 minutes.
-max_runtime: "10m0s"
+max_runtime: "600m0s"
 
 ## The number of parallel executions per fuzz test. The default is 1,
 ## which means for each combination of fuzzing engine and sanitizer,
