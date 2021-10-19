@@ -71,7 +71,7 @@ public class AllImageParser {
 If you haven't done already, you can now explore what the fuzzer found when
 running this fuzz test.
 
-## A note regarding corpus data (and why there are more fuzz tests to explore)
+## A note regarding corpus data
 
 For each fuzz test that we write, a corpus of interesting inputs is built up.
 Over time, the fuzzer will add more and more inputs to this corpus, based
@@ -96,7 +96,7 @@ to view and fix the bugs found by the fuzzer.
 
 CI Fuzz allows you to configure your pipeline to automatically trigger the run of fuzz tests.
 Most of the fuzzing runs that you can inspect here were triggered automatically (e.g. by this
-pull request on the GitHub project: [`https://github.com/ci-fuzz/zint/pull/47`](https://github.com/ci-fuzz/zint/pull/47)).
+pull request on the GitHub project: [`https://github.com/ci-fuzz/commons-imaging/pull/9`](https://github.com/ci-fuzz/commons-imaging/pull/9)).
 With this configuration comes the hidden strength of fuzzing into play:
 Fuzzing is not like a penetration test where your application will be tested one time only.
 Once you have configured your fuzz test it can help you for the whole rest of your developing cycle.
@@ -107,5 +107,3 @@ later during a penetration test or (even worse) in production. This can help to 
 While these demo projects are configured to trigger fuzzing runs on merge or pull requests
 there are many other configuration options for integrating fuzz testing into your CI/CD pipeline
 for example you could also configure your CI/CD to run nightly fuzz tests.
-
-## Where you can go from here  
