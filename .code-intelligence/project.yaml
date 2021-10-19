@@ -6,7 +6,7 @@
 ## by removing the "#".
 
 ## Project description to show in the UI.
-description: "Apache Commons Imaging, previously known as Apache Commons Sanselan, is a library  that reads and writes a variety of image formats, including fast parsing of  image info (size, color space, ICC profile, etc.) and metadata. "
+description: In Apache Commons Imaging, we showcase fuzzing an image parser with the Java fuzzer Jazzer.
 
 ## The fuzz targets are built and run in Docker containers. This setting
 ## allows you to specify the Docker image that should be used for
