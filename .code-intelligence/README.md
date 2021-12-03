@@ -16,13 +16,13 @@ about all edge cases and invalid inputs in addition to handling correct inputs.
 
 ## The solution
 
-Fuzzing is a dynamic code analysis technique that supplies pseudo-random inputs
-to a software-under-test (SUT), derives new inputs from the behaviour of the
-program (i.e. how inputs are processed), and monitors the SUT for bugs.
-
 With fuzz testing, finding edge cases is easy and automated, because the fuzzer
 holds no assumptions about the format of the input. Commons Imaging allows you to process
 arbitrary data using a collection of parsers for different image formats including jpeg, pgn, bnp and gif.
+
+Fuzzing is a dynamic code analysis technique that supplies pseudo-random inputs
+to a software-under-test (SUT), derives new inputs from the behaviour of the
+program (i.e. how inputs are processed), and monitors the SUT for bugs.
 
 ## The setup
 
