@@ -6,7 +6,7 @@
 ## by removing the "#".
 
 ## Project description to show in the UI.
-description: In Apache Commons Imaging, we showcase fuzzing an image parser with the Java fuzzer Jazzer.
+description: Even a widely used image parser has vulnerabilities. Take a look at how fuzzing can help to find those.
 
 ## The fuzz targets are built and run in Docker containers. This setting
 ## allows you to specify the Docker image that should be used for
