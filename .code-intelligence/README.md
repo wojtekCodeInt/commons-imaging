@@ -6,6 +6,8 @@ Apache Commons Imaging, is a library
 that reads and writes a variety of image formats, including fast parsing of 
 image info (size, color space, ICC profile, etc.) and metadata.
 
+For more info on Commons Imaging click here [https://commons.apache.org/proper/commons-imaging/].
+
 ## The problem
 
 Even in a memory-safe language such as Java, 
