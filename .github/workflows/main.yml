@@ -35,7 +35,7 @@ jobs:
         with:
           ci_fuzz_api_token: ${{ secrets.CI_FUZZ_API_TOKEN }}
           fuzzing_server_address: ${{ env.FUZZING_SERVER_ADDRESS }}
-          fuzzing_artifact: ${{ env.CHECKOUT_DIR }}/fuzzing-artifacts.tar
+          fuzzing_artifact: ${{ env.CHECKOUT_DIR }}/fuzzing-artifacts.tar.gz
           checkout_directory: ${{ env.CHECKOUT_DIR }}
       - id: monitor-fuzzing
         name: Fuzzing
