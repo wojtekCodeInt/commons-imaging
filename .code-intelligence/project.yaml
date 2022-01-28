@@ -1,12 +1,12 @@
 ## Configuration for a CI Fuzz project
-## Generated on 2021-10-18 with CI Fuzz 2.25.0
+## Generated on 2022-01-28 with CI Fuzz 2.28.0
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled
 ## by removing the "#".
 
 ## Project description to show in the UI.
-description: Even a widely used image parser has vulnerabilities. Take a look at how fuzzing can help to find those.
+description: "Even a widely used image parser has vulnerabilities. Take a look at how fuzzing can help to find those."
 
 ## The fuzz targets are built and run in Docker containers. This setting
 ## allows you to specify the Docker image that should be used for
@@ -38,13 +38,24 @@ run_container: "cifuzz/builders:maven"
 ## The path must be relative to the root of the project directory.
 build_script: ".code-intelligence/build.sh"
 
+
+
 ## Paths to the fuzz targets to execute.
 fuzz_tests:
   - .code-intelligence/fuzz_targets/AllImageParser.java
 
+## Go packages containing fuzz targets. A fuzzer is created 
+## for each function starting with "Fuzz"
+#go_fuzz_packages:
+#  - github.com/my-org/my-project/my-package
+
 ## Paths to web app fuzz target configs.
 #web_app_target_configs:
 #  - .code-intelligence/fuzz_targets/*.yaml
+
+## Paths to Jazzer autofuzz target configs.
+#autofuzz_configs:
+#  - .code-intelligence/fuzz_targets/Autofuzz*.yaml
 
 ## The sanitizers to use for the fuzz tests. Only applies to C/C++
 ## targets. Note that the Undefined Behavior Sanitizer (UBSan) is
@@ -62,7 +73,7 @@ engines:
 
 ## The run time after which the fuzz tests are cancelled and
 ## considered as having passed. The default is 30 minutes.
-max_runtime: "600m0s"
+max_runtime: "10h0m0s"
 
 ## The number of parallel executions per fuzz test. The default is 1,
 ## which means for each combination of fuzzing engine and sanitizer,

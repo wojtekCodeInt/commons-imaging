@@ -31,8 +31,9 @@ public class AllImageParser {
 	public static void fuzzerTestOneInput(FuzzedDataProvider data) {
 
 		final BufferedImage image;
+		final ImageFormat format = ImageFormats.values()[data.consumeInt(0,14)];
 		try{
-			byte[] imagebytes = data.consumeBytes(data.consumeInt(1,Integer.MAX_VALUE));
+			byte[] imagebytes = data.consumeRemainingAsBytes();
 			image = Imaging.getBufferedImage(imagebytes);
 			final IImageMetadata metadata = Imaging.getMetadata(imagebytes);
 			final ICC_Profile iccProfile = Imaging.getICCProfile(imagebytes);
@@ -42,7 +43,7 @@ public class AllImageParser {
 			return;
 		}
 
-		final ImageFormat format = ImageFormats.values()[data.consumeInt(0,14)];
+		
 		final Map<String, Object> params = new HashMap<>();
 
 		try{
