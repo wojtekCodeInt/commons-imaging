@@ -1,5 +1,5 @@
 ## Configuration for a CI Fuzz project
-## Generated on 2022-01-28 with CI Fuzz 2.28.0
+## Generated on 2022-03-01 with CI Fuzz 2.29.0
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled
@@ -43,8 +43,10 @@ build_script: ".code-intelligence/build.sh"
 ## Paths to the fuzz targets to execute.
 fuzz_tests:
   - .code-intelligence/fuzz_targets/AllImageParser.java
+  - .code-intelligence/fuzz_targets/AllImageParserNoSeeds.java
+  - .code-intelligence/fuzz_targets/AllImageParserGuessFormat.java
 
-## Go packages containing fuzz targets. A fuzzer is created 
+## Go packages containing fuzz targets. A fuzzer is created
 ## for each function starting with "Fuzz"
 #go_fuzz_packages:
 #  - github.com/my-org/my-project/my-package
@@ -63,13 +65,13 @@ fuzz_tests:
 ## Address Sanitizer (and Undefined Behavior Sanitizer) is used.
 sanitizers:
   - address
-  - address
 
 ## The fuzzing engines to use for the fuzz tests. By default, only
 ## libfuzzer is used. Only valid for C/C++ targets.
-engines:
-  - libfuzzer
-  - libfuzzer
+#engines:
+#  - libfuzzer
+#  - afl
+#  - afl_llvm_mode
 
 ## The run time after which the fuzz tests are cancelled and
 ## considered as having passed. The default is 30 minutes.
