@@ -21,7 +21,7 @@ type: "java"
 ## Note that any relative paths are resolved relative to the root of the
 ## project directory.
 run_extra_args:
-  - "--keep_going=60"
+  - "--keep_going=52"
 
 ## Options to pass to the fuzzing engine.
 #engine_options:
