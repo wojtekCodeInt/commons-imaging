@@ -47,15 +47,15 @@ public class AllImageParserGuessFormat {
 	public static void fuzzerTestOneInput(FuzzedDataProvider data)
 			throws JpegReachedException {
 
-		final BufferedImage image;
-		final ImageFormat format;
-		final IImageMetadata metadata;
+		BufferedImage image;
+		ImageFormat format;
+		IImageMetadata metadata;
+		int int1 = data.consumeInt();
+		int int2 = data.consumeInt();
+		int int3 = data.consumeInt();
+		int int4 = data.consumeInt();
+		byte[] imagebytes = data.consumeRemainingAsBytes();
 		try {
-			int int1 = data.consumeInt();
-			int int2 = data.consumeInt();
-			int int3 = data.consumeInt();
-			int int4 = data.consumeInt();
-			byte[] imagebytes = data.consumeRemainingAsBytes();
 			image = Imaging.getBufferedImage(imagebytes);
 			final ICC_Profile iccProfile = Imaging.getICCProfile(imagebytes);
 			final ImageInfo imageInfo = Imaging.getImageInfo(imagebytes);
@@ -87,7 +87,7 @@ public class AllImageParserGuessFormat {
 					final IImageMetadataItem item = items.get(i);
 				}
 			} else if (format == ImageFormats.PNG) {
-				TransparencyFilterTrueColor pngfilter = TransparencyFilterTrueColor(imagebytes);
+				TransparencyFilterTrueColor pngfilter = new TransparencyFilterTrueColor(imagebytes);
 				pngfilter.filter(int1, int2);
 			}
 		} catch (ImageReadException | IOException e) {
