@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-
 import org.apache.commons.imaging.ImageFormat;
 import org.apache.commons.imaging.ImageFormats;
 import org.apache.commons.imaging.ImageReadException;
@@ -23,6 +22,7 @@ import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.taginfos.TagInfo;
 import org.apache.commons.imaging.formats.tiff.constants.TiffTagConstants;
 
+import org.apache.commons.imaging.formats.png.transparencyfilters.TransparencyFilterTrueColor;
 
 import java.awt.Dimension;
 import java.awt.color.ICC_Profile;
@@ -35,23 +35,26 @@ import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.common.IImageMetadata;
 import org.apache.commons.imaging.common.IImageMetadata.IImageMetadataItem;
 
-class JpegReachedException extends Exception  
-{  
-    public JpegReachedException (String str)  
-    {  
-        // calling the constructor of parent Exception  
-        super(str);  
-    }  
-}  
+class JpegReachedException extends Exception {
+	public JpegReachedException(String str) {
+		// calling the constructor of parent Exception
+		super(str);
+	}
+}
+
 public class AllImageParserGuessFormat {
-	
-	public static void fuzzerTestOneInput(FuzzedDataProvider data) 
-	throws JpegReachedException{
+
+	public static void fuzzerTestOneInput(FuzzedDataProvider data)
+			throws JpegReachedException {
 
 		final BufferedImage image;
 		final ImageFormat format;
 		final IImageMetadata metadata;
-		try{
+		try {
+			int int1 = data.consumeInt();
+			int int2 = data.consumeInt();
+			int int3 = data.consumeInt();
+			int int4 = data.consumeInt();
 			byte[] imagebytes = data.consumeRemainingAsBytes();
 			image = Imaging.getBufferedImage(imagebytes);
 			final ICC_Profile iccProfile = Imaging.getICCProfile(imagebytes);
@@ -59,38 +62,42 @@ public class AllImageParserGuessFormat {
 			metadata = Imaging.getMetadata(imagebytes);
 			format = Imaging.guessFormat(imagebytes);
 
-		} catch(ImageReadException | IOException e){
+		} catch (ImageReadException | IOException e) {
 			return;
 		}
 		// Fuzz functions specific to formats:
-		if (format == ImageFormats.JPEG) {
-            final JpegImageMetadata jpegMetadata = (JpegImageMetadata) metadata;
-			try {
+		try {
+			if (format == ImageFormats.JPEG) {
+				final JpegImageMetadata jpegMetadata = (JpegImageMetadata) metadata;
+
 				jpegMetadata.getEXIFThumbnailSize();
 				jpegMetadata.findEXIFValueWithExactMatch(TiffTagConstants.TIFF_TAG_XRESOLUTION);
 				// simple interface to GPS data
 				final TiffImageMetadata exifMetadata = jpegMetadata.getExif();
 				if (null != exifMetadata) {
-				   final TiffImageMetadata.GPSInfo gpsInfo = exifMetadata.getGPS();
-				   if (null != gpsInfo) {
-					   final String gpsDescription = gpsInfo.toString();
-					   final double longitude = gpsInfo.getLongitudeAsDegreesEast();
-					   final double latitude = gpsInfo.getLatitudeAsDegreesNorth();
-				   }
+					final TiffImageMetadata.GPSInfo gpsInfo = exifMetadata.getGPS();
+					if (null != gpsInfo) {
+						final String gpsDescription = gpsInfo.toString();
+						final double longitude = gpsInfo.getLongitudeAsDegreesEast();
+						final double latitude = gpsInfo.getLatitudeAsDegreesNorth();
+					}
 				}
 				final List<IImageMetadataItem> items = jpegMetadata.getItems();
 				for (int i = 0; i < items.size(); i++) {
 					final IImageMetadataItem item = items.get(i);
 				}
-			} catch (ImageReadException | IOException e) {
-				return;
+			} else if (format == ImageFormats.PNG) {
+				TransparencyFilterTrueColor pngfilter = TransparencyFilterTrueColor(imagebytes);
+				pngfilter.filter(int1, int2);
 			}
+		} catch (ImageReadException | IOException e) {
+			return;
 		}
 		final Map<String, Object> params = new HashMap<>();
 
-		try{
-        	Imaging.writeImageToBytes(image, format, params);
-		} catch(ImageWriteException | IOException e){
+		try {
+			Imaging.writeImageToBytes(image, format, params);
+		} catch (ImageWriteException | IOException e) {
 			return;
 		}
 	}
