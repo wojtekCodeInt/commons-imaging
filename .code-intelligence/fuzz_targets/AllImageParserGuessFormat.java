@@ -21,8 +21,8 @@ import org.apache.commons.imaging.formats.tiff.TiffImageMetadata;
 import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.taginfos.TagInfo;
 import org.apache.commons.imaging.formats.tiff.constants.TiffTagConstants;
-
-import org.apache.commons.imaging.formats.png.transparencyfilters.TransparencyFilterTrueColor;
+import org.apache.commons.imaging.formats.png.transparencyfilters.*;
+import org.apache.commons.imaging.formats.png.BitParser;
 
 import java.awt.Dimension;
 import java.awt.color.ICC_Profile;
@@ -43,6 +43,13 @@ class JpegReachedException extends Exception {
 }
 
 public class AllImageParserGuessFormat {
+	private static boolean pngReached;
+	private static boolean jpgReached;
+
+	public static void fuzzerInitialize() {
+		pngReached = false;
+		jpgReached = false;
+	}
 
 	public static void fuzzerTestOneInput(FuzzedDataProvider data)
 			throws JpegReachedException {
@@ -68,6 +75,10 @@ public class AllImageParserGuessFormat {
 		// Fuzz functions specific to formats:
 		try {
 			if (format == ImageFormats.JPEG) {
+				if (!jpgReached) {
+					jpgReached = true;
+					System.out.println("JPEG reached");
+				}
 				final JpegImageMetadata jpegMetadata = (JpegImageMetadata) metadata;
 
 				jpegMetadata.getEXIFThumbnailSize();
@@ -87,8 +98,21 @@ public class AllImageParserGuessFormat {
 					final IImageMetadataItem item = items.get(i);
 				}
 			} else if (format == ImageFormats.PNG) {
-				TransparencyFilterTrueColor pngfilter = new TransparencyFilterTrueColor(imagebytes);
-				pngfilter.filter(int1, int2);
+				if (!pngReached) {
+					pngReached = true;
+					System.out.println("PNG reached");
+				}
+				final TransparencyFilter filters[] = {
+						new TransparencyFilterTrueColor(imagebytes),
+						new TransparencyFilterIndexedColor(imagebytes),
+						new TransparencyFilterGrayscale(imagebytes),
+				};
+				for (TransparencyFilter pngfilter : filters) {
+					pngfilter.filter(int1, int2);
+				}
+				BitParser pngbp = new BitParser(imagebytes,int3,int4);
+				pngbp.getSample(int1, int2);
+				pngbp.getSampleAsByte(int1,int2);
 			}
 		} catch (ImageReadException | IOException e) {
 			return;
