@@ -1,5 +1,5 @@
 ## Configuration of a CI Fuzz test
-## Generated on 2022-03-01 with CI Fuzz 2.29.0
+## Generated on 2022-03-10 with CI Fuzz 2.29.3+yandex
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled

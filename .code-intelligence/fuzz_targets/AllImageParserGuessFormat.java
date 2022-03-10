@@ -18,11 +18,8 @@ import org.apache.commons.imaging.ImagingConstants;
 import org.apache.commons.imaging.formats.tiff.constants.TiffConstants;
 import org.apache.commons.imaging.formats.tiff.TiffField;
 import org.apache.commons.imaging.formats.tiff.TiffImageMetadata;
-import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
 import org.apache.commons.imaging.formats.tiff.taginfos.TagInfo;
 import org.apache.commons.imaging.formats.tiff.constants.TiffTagConstants;
-import org.apache.commons.imaging.formats.png.transparencyfilters.*;
-import org.apache.commons.imaging.formats.png.BitParser;
 
 import java.awt.Dimension;
 import java.awt.color.ICC_Profile;
@@ -35,32 +32,12 @@ import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.common.IImageMetadata;
 import org.apache.commons.imaging.common.IImageMetadata.IImageMetadataItem;
 
-class JpegReachedException extends Exception {
-	public JpegReachedException(String str) {
-		// calling the constructor of parent Exception
-		super(str);
-	}
-}
-
 public class AllImageParserGuessFormat {
-	private static boolean pngReached;
-	private static boolean jpgReached;
-
-	public static void fuzzerInitialize() {
-		pngReached = false;
-		jpgReached = false;
-	}
-
-	public static void fuzzerTestOneInput(FuzzedDataProvider data)
-			throws JpegReachedException {
+	public static void fuzzerTestOneInput(FuzzedDataProvider data) {
 
 		BufferedImage image;
 		ImageFormat format;
 		IImageMetadata metadata;
-		int int1 = data.consumeInt();
-		int int2 = data.consumeInt();
-		int int3 = data.consumeInt();
-		int int4 = data.consumeInt();
 		byte[] imagebytes = data.consumeRemainingAsBytes();
 		try {
 			image = Imaging.getBufferedImage(imagebytes);
@@ -69,51 +46,6 @@ public class AllImageParserGuessFormat {
 			metadata = Imaging.getMetadata(imagebytes);
 			format = Imaging.guessFormat(imagebytes);
 
-		} catch (ImageReadException | IOException e) {
-			return;
-		}
-		// Fuzz functions specific to formats:
-		try {
-			if (format == ImageFormats.JPEG) {
-				if (!jpgReached) {
-					jpgReached = true;
-					System.out.println("JPEG reached");
-				}
-				final JpegImageMetadata jpegMetadata = (JpegImageMetadata) metadata;
-
-				jpegMetadata.getEXIFThumbnailSize();
-				jpegMetadata.findEXIFValueWithExactMatch(TiffTagConstants.TIFF_TAG_XRESOLUTION);
-				// simple interface to GPS data
-				final TiffImageMetadata exifMetadata = jpegMetadata.getExif();
-				if (null != exifMetadata) {
-					final TiffImageMetadata.GPSInfo gpsInfo = exifMetadata.getGPS();
-					if (null != gpsInfo) {
-						final String gpsDescription = gpsInfo.toString();
-						final double longitude = gpsInfo.getLongitudeAsDegreesEast();
-						final double latitude = gpsInfo.getLatitudeAsDegreesNorth();
-					}
-				}
-				final List<IImageMetadataItem> items = jpegMetadata.getItems();
-				for (int i = 0; i < items.size(); i++) {
-					final IImageMetadataItem item = items.get(i);
-				}
-			} else if (format == ImageFormats.PNG) {
-				if (!pngReached) {
-					pngReached = true;
-					System.out.println("PNG reached");
-				}
-				final TransparencyFilter filters[] = {
-						new TransparencyFilterTrueColor(imagebytes),
-						new TransparencyFilterIndexedColor(imagebytes),
-						new TransparencyFilterGrayscale(imagebytes),
-				};
-				for (TransparencyFilter pngfilter : filters) {
-					pngfilter.filter(int1, int2);
-				}
-				BitParser pngbp = new BitParser(imagebytes,int3,int4);
-				pngbp.getSample(int1, int2);
-				pngbp.getSampleAsByte(int1,int2);
-			}
 		} catch (ImageReadException | IOException e) {
 			return;
 		}

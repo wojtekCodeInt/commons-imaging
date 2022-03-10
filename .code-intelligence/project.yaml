@@ -1,5 +1,5 @@
 ## Configuration for a CI Fuzz project
-## Generated on 2022-03-01 with CI Fuzz 2.29.0
+## Generated on 2022-03-10 with CI Fuzz 2.29.3+bugfix
 ##
 ## Lines that start with "##" are explanations for the following
 ## setting, lines that start with "#" are settings that can be enabled
@@ -42,9 +42,8 @@ build_script: ".code-intelligence/build.sh"
 
 ## Paths to the fuzz targets to execute.
 fuzz_tests:
-  #- .code-intelligence/fuzz_targets/AllImageParser.java
-  #- .code-intelligence/fuzz_targets/AllImageParserNoSeeds.java
   - .code-intelligence/fuzz_targets/AllImageParserGuessFormat.java
+  - .code-intelligence/fuzz_targets/FuzzFormatSpecificMethods.java
 
 ## Go packages containing fuzz targets. A fuzzer is created
 ## for each function starting with "Fuzz"
