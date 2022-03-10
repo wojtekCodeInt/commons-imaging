@@ -22,7 +22,7 @@ type: "java"
 ## project directory.
 run_extra_args:
   - "--keep_going=44"
-  - "--jvm_args=-Xmx4096m"
+  - "--jvm_args=-Xmx2560m"
 
 ## Options to pass to the fuzzing engine.
 #engine_options:

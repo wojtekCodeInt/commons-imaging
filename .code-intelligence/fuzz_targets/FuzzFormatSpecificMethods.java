@@ -39,10 +39,14 @@ import org.apache.commons.imaging.common.IImageMetadata.IImageMetadataItem;
 public class FuzzFormatSpecificMethods {
 	private static boolean pngReached;
 	private static boolean jpgReached;
+	private static boolean xpmReached;
+	private static boolean xbmReached;
 
 	public static void fuzzerInitialize() {
 		pngReached = false;
 		jpgReached = false;
+		xpmReached = false;
+		xbmReached = false;
 	}
 
 	public static void fuzzerTestOneInput(FuzzedDataProvider data) {
@@ -122,6 +126,16 @@ public class FuzzFormatSpecificMethods {
 				BitParser pngbp = new BitParser(imagebytes,int3,int4);
 				pngbp.getSample(int1, int2);
 				pngbp.getSampleAsByte(int1,int2);
+			} else if (format == ImageFormats.XPM) {
+				if (!xpmReached) {
+					xpmReached = true;
+					System.out.println("XPM reached");
+				}
+			} else if (format == ImageFormats.XBM) {
+				if (!xbmReached) {
+					xbmReached = true;
+					System.out.println("XBM reached");
+				}
 			}
 		} catch (ImageReadException | IOException e) {
 			return;
